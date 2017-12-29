@@ -1,42 +1,57 @@
 const app = {
-    Title: "Indecision App"
+    Title: "Indecision App",
+    Subtitle: "My indecision App",
+    Options:["one","two"]
 };
 
-const appRoot = document.getElementById("app");
-
-//properties
-let count=0;
-  
-//functions
-  const addOne =() =>{
-      count++;
+const AddOption = (e) => {
     
-      renderCounterApp();
-    };
-  const minusOne =() =>{ 
-      count--;
-      renderCounterApp();
-    };
-    const reset=() =>{
-      count=0;
-      renderCounterApp();
-    };
+    e.preventDefault();
+    const option = e.target.elements.option.value;
+    
+    if(option){
+        app.Options.push(option);
+        e.target.elements.option.value = "";
+        RenderApp(); 
+    }
 
+    console.log("form submited ");
 
-    const renderCounterApp = () => {
+};
+
+const DeleteAll = () =>{
+    app.Options = [];
+    RenderApp();
+};
+
+ const RenderApp = () => {
+
+    const template =(
        
-        const templateTwo =(
-            <div>
-               <h1>Count: {count}</h1>
-               <button onClick={addOne}>+1</button>
-               <button onClick={minusOne}>-1</button>
-               <button onClick={reset}>reset</button>
-            </div>
-           );
+        <div>
+            <h1>{app.Title}</h1>
+            {app.Subtitle && <p>{app.Subtitle}</p>}
+            <p>{app.Options > 0 ? "your options" : "no options"}  </p>
+            <p>{app.Options.length}</p>
+            <button onClick= {DeleteAll}>DELETE ALL!</button>
+            <ol>
+                <li>Item</li>
+                <li>Item</li>
+                
+                </ol>
 
-           ReactDOM.render(templateTwo,appRoot);
-    };
+                <form  onSubmit={AddOption}>
+                <input type="text" name="option"/>
+                <button>Add option</button>
+                </form>
+        </div>
+    );
 
-    renderCounterApp();
+    const appRoot = document.getElementById("app");
+    ReactDOM.render(template,appRoot);
 
+ };
+    
+
+ RenderApp();
 
