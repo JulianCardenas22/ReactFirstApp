@@ -3,7 +3,7 @@
 var app = {
     Title: "Indecision App",
     Subtitle: "My indecision App",
-    Options: ["one", "two"]
+    Options: []
 };
 
 var AddOption = function AddOption(e) {
@@ -18,6 +18,14 @@ var AddOption = function AddOption(e) {
     }
 
     console.log("form submited ");
+};
+
+var MakeDecision = function MakeDecision() {
+    if (app.Options.length > 0) {
+        var randomNum = Math.floor(Math.random() * app.Options.length);
+        var option = app.Options[randomNum];
+        alert(option);
+    }
 };
 
 var DeleteAll = function DeleteAll() {
@@ -43,13 +51,8 @@ var RenderApp = function RenderApp() {
         React.createElement(
             "p",
             null,
-            app.Options > 0 ? "your options" : "no options",
+            app.Options.length > 0 ? "your options" : "no options",
             "  "
-        ),
-        React.createElement(
-            "p",
-            null,
-            app.Options.length
         ),
         React.createElement(
             "button",
@@ -59,16 +62,15 @@ var RenderApp = function RenderApp() {
         React.createElement(
             "ol",
             null,
-            React.createElement(
-                "li",
-                null,
-                "Item"
-            ),
-            React.createElement(
-                "li",
-                null,
-                "Item"
-            )
+            app.Options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    { key: option },
+                    " ",
+                    option,
+                    " "
+                );
+            })
         ),
         React.createElement(
             "form",
@@ -79,6 +81,11 @@ var RenderApp = function RenderApp() {
                 null,
                 "Add option"
             )
+        ),
+        React.createElement(
+            "button",
+            { disabled: app.Options.length === 0, onClick: MakeDecision },
+            "What should i do?"
         )
     );
 

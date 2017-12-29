@@ -1,7 +1,7 @@
 const app = {
     Title: "Indecision App",
     Subtitle: "My indecision App",
-    Options:["one","two"]
+    Options:[]
 };
 
 const AddOption = (e) => {
@@ -19,6 +19,16 @@ const AddOption = (e) => {
 
 };
 
+const MakeDecision = () => {
+    if(app.Options.length >0){
+    const randomNum = Math.floor(Math.random()* app.Options.length) ;
+    const option = app.Options[randomNum];    
+        alert(option);
+    }
+
+    
+};
+
 const DeleteAll = () =>{
     app.Options = [];
     RenderApp();
@@ -31,12 +41,16 @@ const DeleteAll = () =>{
         <div>
             <h1>{app.Title}</h1>
             {app.Subtitle && <p>{app.Subtitle}</p>}
-            <p>{app.Options > 0 ? "your options" : "no options"}  </p>
-            <p>{app.Options.length}</p>
+            <p>{app.Options.length > 0 ? "your options" : "no options"}  </p>
+          
             <button onClick= {DeleteAll}>DELETE ALL!</button>
             <ol>
-                <li>Item</li>
-                <li>Item</li>
+            {
+                app.Options.map( (option) => {
+                    return <li key ={option}> {option} </li>
+                })
+            }
+                
                 
                 </ol>
 
@@ -44,6 +58,8 @@ const DeleteAll = () =>{
                 <input type="text" name="option"/>
                 <button>Add option</button>
                 </form>
+
+                <button disabled={app.Options.length === 0  } onClick={MakeDecision}>What should i do?</button>
         </div>
     );
 
