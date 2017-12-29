@@ -1,0 +1,95 @@
+"use strict";
+
+var app = {
+  Title: "Indecision App",
+  Subtitle: "put your life in the hands of a computer",
+  options: ["one", "two"]
+};
+
+var appRoot = document.getElementById("app");
+// templates
+var template = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    app.Title
+  ),
+  app.Subtitle && React.createElement(
+    "p",
+    null,
+    app.Subtitle
+  ),
+  React.createElement(
+    "p",
+    null,
+    app.options.length > 0 ? "Here are your options" : "No options"
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "li"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "li"
+    )
+  )
+);
+
+var addOne = function addOne() {
+  return console.log("add one");
+};
+var minusOne = function minusOne() {
+  return console.log("minus one");
+};
+
+var count = 0;
+var templateTwo = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Count: ",
+    count
+  ),
+  React.createElement(
+    "button",
+    { onClick: addOne },
+    "+1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: minusOne },
+    "+1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: addOne },
+    "+1"
+  )
+);
+
+ReactDOM.render(templateTwo, appRoot);
+"use strict";
+
+var app = {
+  Title: "Indecision App",
+  Subtitle: "put your life in the hands of a computer",
+  options: ["one", "two"]
+};
+
+var appRoot = document.getElementById("app");
+// templates
+var template = React.createElement("div", null, React.createElement("h1", null, app.Title), app.Subtitle && React.createElement("p", null, app.Subtitle), React.createElement("p", null, app.options.length > 0 ? "Here are your options" : "No options"), React.createElement("ol", null, React.createElement("li", null, "li"), React.createElement("li", null, "li")));
+
+var count = 0;
+var templateTwo = React.createElement("div", null, React.createElement("h1", null, "Count: ", count), React.createElement("button", { id: "my-id", className: "button" }, "+1"));
+
+ReactDOM.render(templateTwo, appRoot);
