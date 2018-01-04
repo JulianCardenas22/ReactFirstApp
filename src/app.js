@@ -34,6 +34,9 @@ const DeleteAll = () =>{
     RenderApp();
 };
 
+
+let Status=true;
+
  const RenderApp = () => {
 
     const template =(
@@ -60,6 +63,7 @@ const DeleteAll = () =>{
                 </form>
 
                 <button disabled={app.Options.length === 0  } onClick={MakeDecision}>What should i do?</button>
+
         </div>
     );
 
@@ -68,6 +72,8 @@ const DeleteAll = () =>{
 
  };
     
+
+
 
  RenderApp();
 

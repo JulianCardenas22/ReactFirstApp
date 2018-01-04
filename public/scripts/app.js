@@ -33,6 +33,8 @@ var DeleteAll = function DeleteAll() {
     RenderApp();
 };
 
+var Status = true;
+
 var RenderApp = function RenderApp() {
 
     var template = React.createElement(
