@@ -1,76 +1,79 @@
 const app = {
     Title: "Indecision App",
-    Subtitle: "put your life in the hands of a computer",
-    options : ["one","two"]
+    Subtitle: "My indecision App",
+    Options:[]
 };
 
-const user ={
-    Name: 'Julian Cardenas',
-    Age:21,
-    Location:'Monterrey',
-    Places:["Mexico","USA","Chile"],
-    PrintPlacesLived(){
-     console.log(this.Name);
-     console.log(this.Age);
-     console.log(this.Location)
-     this.Places.forEach((city) => {
-        console.log(this.Name + " has lived in " + city);
-     });
+const AddOption = (e) => {
+    
+    e.preventDefault();
+    const option = e.target.elements.option.value;
+    
+    if(option){
+        app.Options.push(option);
+        e.target.elements.option.value = "";
+        RenderApp(); 
     }
+
+    console.log("form submited ");
+
 };
 
-const multiplier ={
-    Numbers: [2,3,4],
-    MultiplyBy: 3,
-    multiply(){
-        return this.Numbers.map((number) => number* this.MultiplyBy ); 
+const MakeDecision = () => {
+    if(app.Options.length >0){
+    const randomNum = Math.floor(Math.random()* app.Options.length) ;
+    const option = app.Options[randomNum];    
+        alert(option);
     }
+
+    
 };
 
-user.PrintPlacesLived();
-
-const getFirstName =(user) => user.Name.split(" ")[0]; 
-
-const gfn  = (user) => {
-    return user.Name.split(" ")[0];
- }
-
-let gfnlet = (user) => user.Name.split(" ")[0];
-function getLocation(location){
-    if(location)
-    return <p>Location: {location}</p>;
+const DeleteAll = () =>{
+    app.Options = [];
+    RenderApp();
 };
 
- 
-console.log(multiplier.multiply());
 
-console.log("\n");
-console.log(gfnlet(user));
-console.log(gfn(user));
-console.log(getFirstName(user));
+let Status=true;
+
+ const RenderApp = () => {
+
+    const template =(
+       
+        <div>
+            <h1>{app.Title}</h1>
+            {app.Subtitle && <p>{app.Subtitle}</p>}
+            <p>{app.Options.length > 0 ? "your options" : "no options"}  </p>
+          
+            <button onClick= {DeleteAll}>DELETE ALL!</button>
+            <ol>
+            {
+                app.Options.map( (option) => {
+                    return <li key ={option}> {option} </li>
+                })
+            }
+                
+                
+                </ol>
+
+                <form  onSubmit={AddOption}>
+                <input type="text" name="option"/>
+                <button>Add option</button>
+                </form>
+
+                <button disabled={app.Options.length === 0  } onClick={MakeDecision}>What should i do?</button>
+
+        </div>
+    );
+
+    const appRoot = document.getElementById("app");
+    ReactDOM.render(template,appRoot);
+
+ };
+    
 
 
-const appRoot = document.getElementById("app");
-// templates
-const template =(  
-    <div>   
-      <h1>{app.Title}</h1>
-     {app.Subtitle && <p>{app.Subtitle}</p>}
-     <p>{app.options.length >0 ? "Here are your options" : "No options"}</p>
-      <ol>
-          <li>li</li>
-          <li>li</li>
-      </ol>
-    </div>
-  );
-  
 
-const templateTwo =(
-    <div>
-    <h1>{ user.Name ? user.Name : "Anonymous" }</h1>
-   { (user.Age && user.Age >= 18) && <p>Age: {user.Age + " !"}</p> }
-   { getLocation(user.Location) }
-    </div>
-);
+ RenderApp();
 
-ReactDOM.render(template,appRoot);

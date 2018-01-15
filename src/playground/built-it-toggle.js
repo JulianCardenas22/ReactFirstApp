@@ -1,22 +1,28 @@
-const visibility= false;
+let Visibility = false;
 
-const HideDetails = () =>{
-    const stateButton =""
-    if(visibility){
-        visibility=false;
-        stateButton="Hide"
-    }else{
-        visibility=true;
+const ToggleVisibility = () =>{
 
-    }
-        
+Visibility =  !Visibility;
+render();
+}
+
+const render = () =>{
+    const jsx = (
+    <div>
+        <h1>Visibility Toggle</h1>
+        {
+            (Visibility && (<p>Hey this text was Hidden</p>) ) 
+            
+        }
+
+        <button onClick={ToggleVisibility}>
+        {
+            Visibility ? "Hidde" : "Show"
+        }</button>
+    </div>
+    );
+
+    ReactDOM.render(jsx,document.getElementById("app"));
 };
 
-const template =(
-<div>
-    <h1>Toggle :)</h1>
-    <p disabled={visibility}>details !!!</p>
-    <button onClick={HideDetails}>{stateButton}</button>
-</div>
-
-);
+render();

@@ -1,3 +1,18 @@
+class IndecisionApp extends React.Component{
+     
+    render(){
+        let options = ["op1","op2","op3"];
+  
+        return <div>
+        <Header/>
+        <Action/>
+        <Options options={options} optionsLength={options.length} />
+        <AddOption/>
+        </div>
+    }
+}
+
+
 class Header extends React.Component {
 
     //Must define
@@ -17,9 +32,27 @@ class Options extends React.Component{
     render(){
         return (
             <div>
-            <p>options...</p>
+            <p>Options {this.props.optionsLength}</p>
+            {
+                this.props.options.map( (option ) => {
+                    <Option key={option} optionText={option}/> 
+                } 
+            )
+        }
+            
+        <Option/>
             </div>
         );
+    }
+}
+
+class Option extends React.Component{
+    render(){
+      return <div>
+    
+      Option:{  this.props.optionText}
+    
+      </div>
     }
 }
 
@@ -44,15 +77,5 @@ class Action extends React.Component{
 }
 
 
-const jsx =(
-    <div>
-        <h1>Title</h1>
-    <Header/>
-    <Action/>
-    <Options/>
-    <AddOption/>
-    
-     </div>
-);
 
-ReactDOM.render(jsx,document.getElementById("app"));
+ReactDOM.render(<IndecisionApp/>,document.getElementById("app"));
